@@ -6,6 +6,7 @@ from datetime import timedelta
 from subprocess import Popen, call, PIPE, STDOUT, DEVNULL
 from tinytag import TinyTag
 
+
 def check_bash_package_installed(package_name):
     if call(["which", package_name], stdin=PIPE, stdout=DEVNULL, stderr=STDOUT, timeout=60) == 0:
         return True
@@ -37,7 +38,7 @@ def get_m4a_duration_slow(path: pathlib.Path):
 def get_m4a_duration_fast(path: pathlib.Path):
     path = pathlib.Path(path)
     try:
-        audio= TinyTag.get(path)
+        audio = TinyTag.get(path)
     except Exception as e:
         print('🛑 Some Error in get_m4a_duration(): ', e)
         return 0
@@ -157,7 +158,7 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('-d', '--duration', type=int, default=12, help='Duration (in minutes) [Default is 12 minutess]')
-    parser.add_argument( '--delta', type=int, default=7, help='Delta time bounds around cutting place (in seconds) [Default is 7 seconds]')
+    parser.add_argument('--delta', type=int, default=7, help='Delta time bounds around cutting place (in seconds) [Default is 7 seconds]')
     parser.add_argument('--bitrate', type=int, default=48, help='Bitrate like: 48 - means 48k. [Default is 48]')
     parser.add_argument('--timeout-subprocess', type=int, default=600, help='Timeout fo Subprocess FFMPEG (in seconds). [Default 600 seconds]')
     parser.add_argument('path', type=pathlib.Path, help='Audio Book path in format .m4a')
